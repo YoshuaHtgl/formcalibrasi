@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Input Data</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background:#f5f5f5;
+  padding:20px;
+}
+
+form {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  max-width:400px;
+  margin:auto;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+input {
+  width:100%;
+  padding:8px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+button {
+  margin-top:20px;
+  width:100%;
+  padding:10px;
+  background:#007BFF;
+  color:white;
+  border:none;
+  border-radius:5px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover {
+  background:#0056b3;
+}
+</style>
+</head>
+
+<body>
+
+<form id="dataForm">
+  <h2>Form Input</h2>
+
+  <label>Nama:</label>
+  <input type="text" name="NAMA" required>
+
+  <label>Hasil:</label>
+  <input type="text" name="HASIL" required>
+
+  <button type="submit" id="submitBtn">Kirim</button>
+</form>
+
+<script>
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbzKbo-gfzyUTBd5Q7gR0rcgUvrWhrF7XlMd23pVbcquubeYu5S-KcNfiPBxdS7hQ6ldnA/exec";
+const form = document.getElementById("dataForm");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Mengirim...";
+
+  fetch(scriptURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  })
+  .then(() => {
+    alert("✅ Data berhasil dikirim");
+    form.reset();
+  })
+  .catch(err => {
+    alert("❌ Error: " + err);
+  })
+  .finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Kirim";
+  });
+
+});
+
+</script>
+
+</body>
+</html>
