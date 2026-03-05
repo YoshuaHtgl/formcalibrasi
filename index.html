@@ -27,12 +27,35 @@ label {
   font-weight:bold;
 }
 
-input {
+input, select {
   width:100%;
   padding:8px;
   margin-top:5px;
   border:1px solid #ccc;
   border-radius:5px;
+}
+
+.code-group {
+  display: grid;
+  grid-template-columns: 60px 15px 1fr 15px 1fr 15px 1fr 15px 1fr;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.code-group input {
+  width: 100%;
+  text-align: center;
+}
+
+.code-group input:first-child {
+  background: #eee;
+  font-weight: bold;
+}
+
+.code-group span {
+  text-align: center;
+  font-weight: bold;
 }
 
 button {
@@ -47,6 +70,40 @@ button {
   cursor:pointer;
 }
 
+.time-group{
+  display:flex;
+  gap:10px;
+}
+
+.time-group div{
+  flex:1;
+}
+
+.kalibrasi-table{
+  display:grid;
+  grid-template-columns:40px 1fr 1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+  align-items:center;
+}
+
+.kalibrasi-no{
+  text-align:center;
+  font-weight:bold;
+}
+
+.kalibrasi-title{
+  font-weight:bold;
+  text-align:center;
+  background:#f2f2f2;
+  padding:6px;
+  border-radius:4px;
+}
+
+.kalibrasi-table input{
+  text-align:center;
+}
+
 button:hover {
   background:#0056b3;
 }
@@ -59,22 +116,171 @@ button:hover {
   <h2>Form Input</h2>
 
   <label>Nama:</label>
-  <input type="text" name="NAMA" required>
+  <select name="NAMA" required>
+    <option value="">-- Pilih Nama --</option>
+    <option value="Gibran">Gibran</option>
+    <option value="Murdani">Murdani</option>
+    <option value="Ali Janudin">Ali Janudin</option>
+    <option value="Fadil">Fadil</option>
+    <option value="Bayu Samudra">Bayu Samudra</option>
+  </select>
 
-  <label>Hasil:</label>
-  <input type="text" name="HASIL" required>
+  <label>Instrument Code:</label>
+
+<div class="code-group">
+  <input type="text" value="TJN" readonly>
+  <span>-</span>
+  <input type="text" id="X1" placeholder="-" required>
+  <span>-</span>
+  <input type="text" id="X2" placeholder="-" required>
+  <span>-</span>
+  <input type="text" id="X3" placeholder="-" required>
+  <span>-</span>
+  <input type="text" id="X4" placeholder="-">
+</div>
+
+  <!-- Hidden field untuk dikirim -->
+  <input type="hidden" name="InstrumentCode" id="InstrumentCode">
+  
+ <label>Identitas Standard:</label>
+  <select name="IdentitasStandard" required>
+    <option value="">-- Identitas Standard --</option>
+    <option value="CL-MB-01">CL-MB-01</option>
+    <option value="CL-MB-03">CL-MB-03</option>
+    <option value="CL-DC-01-01">CL-DC-01-01</option>
+    <option value="CL-DC-02">CL-DC-02</option>
+  </select> 
+  
+<label>Tanggal:</label>
+<input type="date" name="Tanggal" id="Tanggal" required>
+
+<label>Waktu Kalibrasi:</label>
+
+<div class="time-group">
+
+  <div>
+    <label>Jam Start</label>
+    <select name="JamStart" required>
+      <option value="">-- Start --</option>
+      <option value="10:00">10:00</option>
+      <option value="11:00">11:00</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Jam Finish</label>
+    <select name="JamFinish" required>
+      <option value="">-- Finish --</option>
+      <option value="11:00">11:00</option>
+      <option value="12:00">12:00</option>
+    </select>
+  </div>
+
+</div>
+
+ <label>Tempat:</label>
+  <select name="Tempat" required>
+    <option value="">-- Tempat --</option>
+    <option value="Calibrasi Room PP2">Calibrasi Room PP2</option>
+  </select> 
+
+<label>Suhu ruang (°C):</label>
+<input type="number" name="SuhuRuang" required>
+
+<label>Kelembaban (%RH):</label>
+<input type="number" name="Kelembaban" required>
+
+<label>Awal Kalibrasi</label>
+
+<div class="kalibrasi-box">
+
+<div class="kalibrasi-table">
+
+<div class="kalibrasi-title">No</div>
+<div class="kalibrasi-title">Set Point (°C)</div>
+<div class="kalibrasi-title">Alat</div>
+<div class="kalibrasi-title">Standard</div>
+
+<div class="kalibrasi-no">1</div>
+<input type="number" name="SetPoint1">
+<input type="number" name="AwalAlat1">
+<input type="number" name="AwalStandard1">
+
+<div class="kalibrasi-no">2</div>
+<input type="number" name="SetPoint2">
+<input type="number" name="AwalAlat2">
+<input type="number" name="AwalStandard2">
+
+<div class="kalibrasi-no">3</div>
+<input type="number" name="SetPoint3">
+<input type="number" name="AwalAlat3">
+<input type="number" name="AwalStandard3">
+
+<div class="kalibrasi-no">4</div>
+<input type="number" name="SetPoint4">
+<input type="number" name="AwalAlat4">
+<input type="number" name="AwalStandard4">
+
+<div class="kalibrasi-no">5</div>
+<input type="number" name="SetPoint5">
+<input type="number" name="AwalAlat5">
+<input type="number" name="AwalStandard5">
+
+<div class="kalibrasi-no">6</div>
+<input type="number" name="SetPoint6">
+<input type="number" name="AwalAlat6">
+<input type="number" name="AwalStandard6">
+
+<div class="kalibrasi-no">7</div>
+<input type="number" name="SetPoint7">
+<input type="number" name="AwalAlat7">
+<input type="number" name="AwalStandard7">
+
+<div class="kalibrasi-no">8</div>
+<input type="number" name="SetPoint8">
+<input type="number" name="AwalAlat8">
+<input type="number" name="AwalStandard8">
+
+</div>
+</div>
+
 
   <button type="submit" id="submitBtn">Kirim</button>
 </form>
 
 <script>
 
-const scriptURL = "https://script.google.com/macros/s/AKfycbzKbo-gfzyUTBd5Q7gR0rcgUvrWhrF7XlMd23pVbcquubeYu5S-KcNfiPBxdS7hQ6ldnA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDfUJtK32ICji3zFPj2J2xck6bBM5_GyCDJLsy6Yjm6Gv6Go0hSXlkt6CleLdwJE_Y5g/exec";
 const form = document.getElementById("dataForm");
 const submitBtn = document.getElementById("submitBtn");
 
+// Auto uppercase saat mengetik
+["X1","X2","X3","X4"].forEach(id => {
+  document.getElementById(id).addEventListener("input", function() {
+    this.value = this.value.toUpperCase();
+  });
+});
+
 form.addEventListener("submit", function(e){
   e.preventDefault();
+
+  // === Ambil & format Instrument Code ===
+  const x1 = document.getElementById("X1").value.trim().toUpperCase();
+  const x2 = document.getElementById("X2").value.trim().toUpperCase();
+  const x3 = document.getElementById("X3").value.trim().toUpperCase();
+
+  if (!x1 || !x2) {
+    alert("X1 dan X2 wajib diisi");
+    return;
+  }
+
+  let finalCode = `TJN-${x1}-${x2}`;
+
+  if (x3 !== "") {
+    finalCode += `-${x3}`;
+  }
+
+  document.getElementById("InstrumentCode").value = finalCode;
 
   const formData = new FormData(form);
 
@@ -87,7 +293,7 @@ form.addEventListener("submit", function(e){
     body: formData
   })
   .then(() => {
-    alert("✅ Data berhasil dikirim");
+    alert("✅ Data berhasil dikirim\nKode: " + finalCode);
     form.reset();
   })
   .catch(err => {
